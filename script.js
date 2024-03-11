@@ -3,6 +3,8 @@
 // controlla che sia nella lista di chi può accedere,
 // stampa un messaggio appropriato sull’esito del controllo.
 
+const gameSection = document.getElementById('dice-game');
+
 const btnEmail = document.getElementById('btn-email');
 let guestResult = document.getElementById('guest-result');
 
@@ -19,11 +21,17 @@ btnEmail.addEventListener("click", function() {
     };
     if (guest == true){
         tempHTML = `
-        Indirizzo email trovato! :)
-        `
+        Indirizzo email trovato!
+        Buona fortuna :)
+        `;
+        gameSection.className = `text-center mt-4`;
+        document.getElementById('db-input-group').className = `d-none`;
+        btnEmail.className = `d-none`;
+        userMail.className = `d-none`;
     } else if (guest == false) {
         tempHTML = `
         Indirizzo email NON trovato!!!
+        Prova con prova@gmail.com
         `
     };  
     guestResult.innerHTML= tempHTML;
@@ -36,21 +44,35 @@ btnEmail.addEventListener("click", function() {
 
 let agentNumber;
 let userNumber;
-let diceResult
+let diceResult;
+let tempHTML = '';
+let tempHTMLUser = '';
+let tempHTMLAgent = '';
 
 const btnDice = document.getElementById('btn-dice');
 
+let sfere = ['sfera-1','sfera-2','sfera-3','sfera-4','sfera-5','sfera-6'];
+
+//inserimento sezione immagini sfere del drago
+// div user
+const userContainer = document.createElement('div');
+userContainer.setAttribute('id','user-dice-result');
+// div agent
+const agentContainer = document.createElement('div');
+agentContainer.setAttribute('id','agent-dice-result');
+
 btnDice.addEventListener("click", function() {
+    //estraggo numeri
     agentNumber = RndNumberGen(1, 6);
     userNumber = RndNumberGen(1, 6);
 
-    let tempHTML = '';
     let diceResult = document.getElementById('dice-result');
-
+    
+    //confronto numeri
     if(agentNumber > userNumber){
         tempHTML = `
             Hai perso :(
-        `
+        `;
     } else if (agentNumber < userNumber) {
         tempHTML = `
             Hai vinto!!!
@@ -61,10 +83,25 @@ btnDice.addEventListener("click", function() {
         `
     }
 
+    //costruisco div con immagine dinamica
+    tempHTMLUser = `
+        <div>Tuo risultato</div>
+        <img class="img-fluid" src="img/${sfere[userNumber - 1]}.png" alt="">
+    `;
+    tempHTMLAgent = `
+        <div>Risultato del banco</div>
+        <img class="img-fluid" src="img/sfera-${agentNumber}.png" alt="">
+    `;
     diceResult.innerHTML = tempHTML;
-    console.log(tempHTML);
-});
 
+    userContainer.innerHTML = tempHTMLUser;
+    agentContainer.innerHTML = tempHTMLAgent;
+    const container = document.querySelector('#dice-result-images');
+    container.append(userContainer, agentContainer);
+
+    window.scrollTo(0, 100000);
+
+});
 
 
 /*
