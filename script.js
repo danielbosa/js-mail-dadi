@@ -30,10 +30,35 @@ btnEmail.addEventListener("click", function() {
 });
 
 
-
-
 // Gioco dei dadi
 // Generare un numero random da 1 a 6, sia per il giocatore sia per il computer.
 // Stabilire il vincitore, in base a chi fa il punteggio più alto.
 
+let agentNumber;
+let userNumber;
 
+const btnDice = document.getElementById('btn-dice');
+
+btnDice.addEventListener("click", function() {
+    agentNumber = RndNumberGen(1, 6);
+    userNumber = RndNumberGen(1, 6);
+    
+    let tempHTML = '';
+    const diceResult = document.createElement('div');
+    diceResult.setAttribute('id', 'dice-result');
+    diceResult.className = 'my-3';
+
+    if(agentNumber > userNumber){
+        tempHTML = `
+            Hai perso :(
+        `
+    } else if (agentNumber < userNumber) {
+        tempHTML = `
+            Hai vinto!!!
+        `
+    } else {
+        tempHTML = `
+            Pareggio
+        `
+    }
+});
