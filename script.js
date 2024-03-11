@@ -36,10 +36,39 @@ btnEmail.addEventListener("click", function() {
 
 let agentNumber;
 let userNumber;
+let diceResult
 
 const btnDice = document.getElementById('btn-dice');
 
-/* btnDice.addEventListener("click", function() {
+btnDice.addEventListener("click", function() {
+    agentNumber = RndNumberGen(1, 6);
+    userNumber = RndNumberGen(1, 6);
+
+    let tempHTML = '';
+    let diceResult = document.getElementById('dice-result');
+
+    if(agentNumber > userNumber){
+        tempHTML = `
+            Hai perso :(
+        `
+    } else if (agentNumber < userNumber) {
+        tempHTML = `
+            Hai vinto!!!
+        `
+    } else {
+        tempHTML = `
+            Pareggio
+        `
+    }
+
+    diceResult.innerHTML = tempHTML;
+    console.log(tempHTML);
+});
+
+
+
+/*
+btnDice.addEventListener("click", function() {
     agentNumber = RndNumberGen(1, 6);
     userNumber = RndNumberGen(1, 6);
 
@@ -68,6 +97,7 @@ const btnDice = document.getElementById('btn-dice');
 });
 */
 
+/*
 btnDice.addEventListener("click", function() {
     agentNumber = RndNumberGen(1, 6);
     userNumber = RndNumberGen(1, 6);
@@ -96,3 +126,4 @@ btnDice.addEventListener("click", function() {
     const container = document.querySelector('#dice-game');
     container.insertAdjacentHTML("beforeend", tempHTML);
 });
+*/
