@@ -4,18 +4,29 @@
 // stampa un messaggio appropriato sull’esito del controllo.
 
 const btnEmail = document.getElementById('btn-email');
+let guestResult = document.getElementById('guest-result');
+
 let emailList = ['danielbosa95@gmail.com','prova@gmail.com','danielbosa952@gmail.com','info@daniel.it'];
 
 btnEmail.addEventListener("click", function() {
     let userMail = document.getElementById('usermail').value;
+    let tempHTML = '';
+    let guest = false;
     for (let i = 0; i < emailList.length; i++) {
-        let guest = false;
-        if (userMail === emailList[i]) {
-            guest = true}
-    }
-    if (guest = true){
-        console.log('bravo');
-    }    
+        if (userMail.toLowerCase() === emailList[i].toLowerCase()) {
+            guest = true;
+        }
+    };
+    if (guest == true){
+        tempHTML = `
+        Indirizzo email trovato! :)
+        `
+    } else if (guest == false) {
+        tempHTML = `
+        Indirizzo email NON trovato!!!
+        `
+    };  
+    guestResult.innerHTML= tempHTML;
 });
 
 
