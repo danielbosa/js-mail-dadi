@@ -39,10 +39,10 @@ let userNumber;
 
 const btnDice = document.getElementById('btn-dice');
 
-btnDice.addEventListener("click", function() {
+/* btnDice.addEventListener("click", function() {
     agentNumber = RndNumberGen(1, 6);
     userNumber = RndNumberGen(1, 6);
-    
+
     let tempHTML = '';
     const diceResult = document.createElement('div');
     diceResult.setAttribute('id', 'dice-result');
@@ -61,4 +61,38 @@ btnDice.addEventListener("click", function() {
             Pareggio
         `
     }
+
+    diceResult.innerHTML = tempHTML;
+    const container = document.querySelector('#dice-game');
+    container.append(diceResult);
+});
+*/
+
+btnDice.addEventListener("click", function() {
+    agentNumber = RndNumberGen(1, 6);
+    userNumber = RndNumberGen(1, 6);
+    let tempHTML = '';
+    
+    if(agentNumber > userNumber){
+        tempHTML = `
+        <div id="dice-result" class="my-3">
+            Hai perso
+        </div>
+        `
+    } else if (agentNumber < userNumber) {
+        tempHTML = `
+        <div id="dice-result" class="my-3">
+            Hai vinto!!!
+        </div>
+        `
+    } else {
+        tempHTML = `
+        <div id="dice-result" class="my-3">
+            Pareggio
+        </div>
+        `
+    }
+
+    const container = document.querySelector('#dice-game');
+    container.insertAdjacentHTML("beforeend", tempHTML);
 });
